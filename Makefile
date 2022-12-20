@@ -4,6 +4,8 @@
 FILENAME = nofilenameprovided
 MCU = atmega328p
 CPUSPEED = 16000000UL
+
+# Port on which arduino is connected. This can be checked in computer's manage -> devices
 COMPORT = com4
 
 ${FILENAME}:
@@ -14,6 +16,6 @@ ${FILENAME}:
 	make clean
 	
 clean:
-	del ${FILENAME}.hex 
-	del ${FILENAME}.o 
+	del ${FILENAME}.hex
+	del ${FILENAME}.o
 	del ${FILENAME}.bin

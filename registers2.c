@@ -12,13 +12,13 @@ configure pins on PORTB either as input or output direction.
 #include <stdio.h>
 
 #define myPORTB *((volatile uint8_t*) 0x25)  // Memory address of port b. Same as PORTB in io.h library
-#define _PORTB_DIRECTION_REGISTER *((volatile uint8_t*) 0x24)
+#define myPORTB_DIRECTION_REGISTER *((volatile uint8_t*) 0x24)
 
 #define SixthBitHigh_Binary 0b00100000 // Binary which will set the 6th bit high from right and everything else low.
 
 int main(void)
 {
-    _PORTB_DIRECTION_REGISTER = SixthBitHigh_Binary; //00100000 sets PB5 as output
+    myPORTB_DIRECTION_REGISTER = SixthBitHigh_Binary; //00100000 sets PB5 as output
 
     for(;;)
     {

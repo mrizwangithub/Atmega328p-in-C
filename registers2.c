@@ -2,7 +2,7 @@
 This file DOES NOT use any libraries provided with avr-gcc compiler.
 
 Manipulating port to blink built in LED connected to Pin 13 which is internally controlled by PORT B.
-PORTB is a set of pins controlled by a byte size (8bits) register having 
+PORTB controls 6 pins PB0 thru PB5 and is a set of pins controlled by a byte size (8bits) register having 
 memory address 0x25. Memory addresses can be found in ATMega328p Datasheet section 13.4.
 
 DDRB(Data direction register) at 0x24 is also a byte sized register dedicated to 

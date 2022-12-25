@@ -1,17 +1,11 @@
 {
-    "makefile.launchConfigurations": [
-        {
-            "cwd": "c:\\Hardware_Programming_Source\\ArduinoUno\\Atmega328p_Programming",
-            "binaryPath": "c:\\Hardware_Programming_Source\\ArduinoUno\\Atmega328p_Programming\\main1.bin",
-            "binaryArgs": []
-        }
-    ],
     //"makefile.loggingLevel": "Debug",
     //"makefile.extensionLog": "./extension.log",
     "files.associations": {
         "*.ejs": "html",
         "delay.h": "c",
         "io.h": "c",
+        "uart_hal.h": "c"
     },
     "C_Cpp.errorSquiggles": "enabledIfIncludesResolve"
 }

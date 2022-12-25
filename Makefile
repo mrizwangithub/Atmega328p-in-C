@@ -9,7 +9,7 @@ CPUSPEED = 16000000UL
 COMPORT = com4
 
 ${FILENAME}:
-	avr-gcc -Os -DF_CPU=${CPUSPEED} -mmcu=${MCU} -c -o ${FILENAME}.o ${FILENAME}.c
+	avr-gcc -Os -DF_CPU=${CPUSPEED} -mmcu=${MCU} -c -o ${FILENAME}.o src/${FILENAME}.c
 	avr-gcc -o ${FILENAME}.bin ${FILENAME}.o
 	avr-objcopy -O ihex -R .eeprom ${FILENAME}.bin ${FILENAME}.hex
 	avrdude -F -V -c arduino -p ${MCU} -P ${COMPORT} -b 115200 -U flash:w:${FILENAME}.hex

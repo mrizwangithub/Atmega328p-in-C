@@ -4,7 +4,7 @@
             "name": "Win32",
             "includePath": [
                 //"${workspaceFolder}/**"
-                //"C:/avr8bitCompiler/**"
+                "C:/avr8bitCompiler/**"
             ],
             "defines": [
                 "_DEBUG",
@@ -16,7 +16,6 @@
             "cStandard": "c11",
             "cppStandard": "c++11",
             "intelliSenseMode": "gcc-x86"
-            //"configurationProvider": "ms-vscode.makefile-tools"
         }
     ],
     "version": 4

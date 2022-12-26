@@ -17,20 +17,20 @@ int main(void){
     mySREG |= (1 << 7);
 
     // External Interrupt Control Register A
-    //EICRA |= (1 << 1) | 1; // Rising edge configure. EICRA Mem address = 0x69
-    myEICRA |= (1 << 1) | 1;
+    //EICRA |= (1 << 1) | 1;
+    myEICRA |= (1 << 1) | 1; // 00000011 To trigger interrupt om rising edge.
 
     // External Interrupt Mask Register. To configrue microcontroller to be ready to sense external interrupt as INT1 or INT0 
-    //EIMSK |= 1; // INT0 . EIMSK Address = 0x3D
-    myEIMSK |= 1;
+    //EIMSK |= 1; 
+    myEIMSK |= 1; // To enable/setup to act on external interrupts on signal at INT0 (Pin 2) of port B.
 
     // Port B data direction register
     //DDRB |= (1 << 5);
-    myDDRB |= (1 << 5);
+    myDDRB |= (1 << 5); // Setup pin 13 or PortB pin 5 data direction as output.
 
     while (1) {;;}
 }
 
 ISR(INT0_vect){
-    PORTB ^= (1 << 5);
+    PORTB ^= (1 << 5); // Toggles the bit.
  }

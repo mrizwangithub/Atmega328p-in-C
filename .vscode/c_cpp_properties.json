@@ -4,7 +4,7 @@
             "name": "Win32",
             "includePath": [
                 //"${workspaceFolder}/**"
-                "C:/avr8bitCompiler/**"
+                //"C:/avr8bitCompiler/**"
             ],
             "defines": [
                 "_DEBUG",

@@ -24,10 +24,12 @@ COMPORT = com4
 # 	make clean
 
 ${FILENAME}:
-	avr-gcc -Wall -g -Os -mmcu=${MCU} -o ${FILENAME}.bin src/${FILENAME}.c 
+	avr-gcc -Wall -g -Os -DF_CPU=${CPUSPEED} -mmcu=${MCU} -o ${FILENAME}.bin src/${FILENAME}.c 
 	avr-size -C ${FILENAME}.bin
-	avr-objcopy -j .text -j .data -O ihex ${FILENAME}.bin ${FILENAME}.hex 
-	avrdude -p ${MCU} -c arduino -P ${COMPORT} -U flash:w:${FILENAME}.hex:i
+#	avr-objcopy -j .text -j .data -O ihex ${FILENAME}.bin ${FILENAME}.hex
+	avr-objcopy -O ihex ${FILENAME}.bin ${FILENAME}.hex
+	avrdude -F -V -c arduino -p ${MCU} -P ${COMPORT} -b 115200 -U flash:w:${FILENAME}.hex
+#	avrdude -p ${MCU} -c arduino -P ${COMPORT} -U flash:w:${FILENAME}.hex:i
 	make clean
 
 clean:

@@ -20,7 +20,7 @@ an intended change
 
 volatile uint8_t portdhistory = 0x00; // default is low because the pull-down
 
-volatile uint8_t portDfirstSignalProcessed = 0x00;
+volatile uint8_t portDintendedSignalProcessed = 0x00; // Variable to set flags against the port pins to track that intended signals are processed.
 
 int main(void)
 {
@@ -62,15 +62,15 @@ ISR(PCINT2_vect)
 
     if (changedbits & (1 << PD4)) /* PCINT4 changed */
     {
-        if (portDfirstSignalProcessed & (1 << PD4)) // Check to ignore the following pin signal change that comes immediately with button release after the first press.
+        if (portDintendedSignalProcessed & (1 << PD4)) // Check to ignore the following pin signal change that comes immediately with button release after the first press.
         {
-            portDfirstSignalProcessed &= ~(1 << PD4); // Make sure to unset the flag so later if I intentionally send another pin change signal/press down button, that is not ignored by the check above. 
+            portDintendedSignalProcessed &= ~(1 << PD4); // Make sure to unset the flag so later if I intentionally send another pin change signal/press down button, that is not ignored by the check above. 
             return;
         }
 
         PORTB ^= (1 << 5);
 
-        portDfirstSignalProcessed |= (1 << PD4); // Set the flag in custom variable to track that first(button press down) signal change is processed. 
+        portDintendedSignalProcessed |= (1 << PD4); // Set the flag in custom variable to track that first(button press down) signal change is processed. 
     }
 
     if (changedbits & (1 << PD5)) /* PCINT5 changed */

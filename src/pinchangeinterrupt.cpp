@@ -1,7 +1,7 @@
 /*
-Pin change interrupt handling with detecting the pin that 
-triggered interrupt and with safety to ensure that signal that immediately follows 
-when button is released after first press is ignored and not proccessed as if it was 
+Pin change interrupt handling with detecting the pin that
+triggered interrupt and with safety to ensure that signal that immediately follows
+when button is released after first press is ignored and not proccessed as if it was
 an intended change
 */
 
@@ -37,51 +37,88 @@ int main(void)
     }
 }
 
-ISR(PCINT2_vect)
+ISR(PCINT2_vect) // Port D pin change interrupt vector
 {
     uint8_t changedbits;
 
     changedbits = PIND ^ portdhistory;
     portdhistory = PIND;
 
-    if (changedbits & (1 << PD0)) /* PCINT0 changed */
+    switch (changedbits & PIND)
     {
-    }
-
-    if (changedbits & (1 << PD1)) /* PCINT1 changed */
-    {
-    }
-
-    if (changedbits & (1 << PD2)) /* PCINT2 changed */
-    {
-    }
-
-    if (changedbits & (1 << PD3)) /* PCINT3 changed */
-    {
-    }
-
-    if (changedbits & (1 << PD4)) /* PCINT4 changed */
-    {
-        if (portDintendedSignalProcessed & (1 << PD4)) // Check to ignore the following pin signal change that comes immediately with button release after the first press.
+        case (1 << PD0):
         {
-            portDintendedSignalProcessed &= ~(1 << PD4); // Make sure to unset the flag so later if I intentionally send another pin change signal/press down button, that is not ignored by the check above. 
-            return;
         }
-
-        PORTB ^= (1 << 5);
-
-        portDintendedSignalProcessed |= (1 << PD4); // Set the flag in custom variable to track that first(button press down) signal change is processed. 
+        break;
+        case (1 << PD1):
+        {
+        }
+        break;
+        case (1 << PD2):
+        {
+        }
+        break;
+        case (1 << PD3):
+        {
+        }
+        break;
+        case (1 << PD4):
+        {
+            PORTB ^= (1 << 5);
+        }
+        break;
+        case (1 << PD5):
+        {
+        }
+        break;
+        case (1 << PD6):
+        {
+        }
+        break;
+        case (1 << PD7):
+        {
+        }
+        break;
     }
 
-    if (changedbits & (1 << PD5)) /* PCINT5 changed */
-    {
-    }
+    // if (changedbits & (1 << PD0)) /* PCINT0 changed */
+    // {
+    // }
 
-    if (changedbits & (1 << PD6)) /* PCINT6 changed */
-    {
-    }
+    // if (changedbits & (1 << PD1)) /* PCINT1 changed */
+    // {
+    // }
 
-    if (changedbits & (1 << PD7)) /* PCINT7 changed */
-    {
-    }
+    // if (changedbits & (1 << PD2)) /* PCINT2 changed */
+    // {
+    // }
+
+    // if (changedbits & (1 << PD3)) /* PCINT3 changed */
+    // {
+    // }
+
+    // if (changedbits & (1 << PD4)) /* PCINT4 changed */
+    // {
+    //     if (portDintendedSignalProcessed & (1 << PD4)) // Check to ignore the following pin signal change that comes immediately with button release after the first press.
+    //     {
+    //         portDintendedSignalProcessed &= ~(1 << PD4); // Make sure to unset the flag so later if I intentionally send another pin change signal/press down button, that is not ignored by the check above.
+    //         return;
+    //     }
+
+    //     PORTB ^= (1 << 5);
+
+    //     portDintendedSignalProcessed |= (1 << PD4); // Set the flag in custom variable to track that first(button press down) signal change is processed.
+    // }
+
+    // if (changedbits & (1 << PD5)) /* PCINT5 changed */
+    // {
+    // }
+
+    // if (changedbits & (1 << PD6)) /* PCINT6 changed */
+    // {
+    // }
+
+    // if (changedbits & (1 << PD7)) /* PCINT7 changed */
+    // {
+    // }
 }

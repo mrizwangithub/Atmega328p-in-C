@@ -11,7 +11,7 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "C:\\avr8bitCompiler\\bin\\avr-gcc",
+            "compilerPath": "C:\\avrgcc\\bin\\avr-gcc",
             "windowsSdkVersion": "10.0.22000.0",
             "cStandard": "c11",
             "cppStandard": "c++11",

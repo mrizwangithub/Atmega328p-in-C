@@ -33,7 +33,7 @@ COMPORT = com4
 # 	make clean
 
 ${FILENAME}:
-	avr-gcc -Wall -g -Os -DF_CPU=${CPUSPEED} -mmcu=${MCU} -o ${FILENAME}.bin src/${FILENAME}.cpp 
+	avr-gcc -Wall -g -Os -DF_CPU=${CPUSPEED} -mmcu=${MCU} -o ${FILENAME}.bin src/${FILENAME}.cpp  
 	avr-size -C ${FILENAME}.bin
 #	avr-objcopy -j .text -j .data -O ihex ${FILENAME}.bin ${FILENAME}.hex
 	avr-objcopy -O ihex ${FILENAME}.bin ${FILENAME}.hex

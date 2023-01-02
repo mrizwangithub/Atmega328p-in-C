@@ -13,7 +13,6 @@ an intended change
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <util/delay.h>
 
 #define mySREG *((volatile uint8_t *)0x5F)
 #define myPCICR *((volatile uint8_t *)0x68)

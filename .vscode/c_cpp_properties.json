@@ -1,21 +1,21 @@
 {
     "configurations": [
         {
-            "name": "Win32",
+            "name": "AVR-Microcontroller",
             "includePath": [
                 //"${workspaceFolder}/**"
-                //"C:/avr8bitCompiler/**"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "C:\\SysGCC\\avr\\bin\\avr-gcc",
+            "compilerPath": "C:\\SysGCC\\avr\\bin\\avr-cpp",
+            //"compilerPath": "C:\\SysGCC\\avr\\bin\\avr-gcc",
             "windowsSdkVersion": "10.0.22000.0",
             "cStandard": "c11",
             "cppStandard": "c++11",
-            "intelliSenseMode": "gcc-x86"
+            "intelliSenseMode":"gcc-x86"
         }
     ],
     "version": 4

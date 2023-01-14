@@ -4,6 +4,7 @@
 FILENAME = nofilenameprovided
 MCU = atmega328p
 CPUSPEED = 16000000
+CPUSPEED_For_ChipOnBreadBoad = 1000000
 
 # Port on which arduino is connected. This can be checked in computer's manage -> devices
 COMPORT = com4
@@ -32,13 +33,22 @@ COMPORT = com4
 # #	avrdude -p ${MCU} -c arduino -P ${COMPORT} -U flash:w:${FILENAME}.hex:i
 # 	make clean
 
+# To use when flashing to Arduino board
+# ${FILENAME}:
+# 	avr-gcc -Wall -g -Os -DF_CPU=${CPUSPEED} -mmcu=${MCU} -o ${FILENAME}.bin src/${FILENAME}.cpp  
+# 	avr-size -C ${FILENAME}.bin
+# #	avr-objcopy -j .text -j .data -O ihex ${FILENAME}.bin ${FILENAME}.hex
+# 	avr-objcopy -O ihex ${FILENAME}.bin ${FILENAME}.hex
+# 	avrdude -F -V -c arduino -p ${MCU} -P ${COMPORT} -b 115200 -U flash:w:${FILENAME}.hex
+# 	make clean
+
+# To use when flashing to Atmega328p chip on breadboad via Arduino as ISP
 ${FILENAME}:
-	avr-gcc -Wall -g -Os -DF_CPU=${CPUSPEED} -mmcu=${MCU} -o ${FILENAME}.bin src/${FILENAME}.cpp  
+	avr-gcc -Wall -g -Os -DF_CPU=${CPUSPEED_For_ChipOnBreadBoad} -mmcu=${MCU} -o ${FILENAME}.bin src/${FILENAME}.cpp  
 	avr-size -C ${FILENAME}.bin
 #	avr-objcopy -j .text -j .data -O ihex ${FILENAME}.bin ${FILENAME}.hex
 	avr-objcopy -O ihex ${FILENAME}.bin ${FILENAME}.hex
-	avrdude -F -V -c arduino -p ${MCU} -P ${COMPORT} -b 115200 -U flash:w:${FILENAME}.hex
-#	avrdude -p ${MCU} -c arduino -P ${COMPORT} -U flash:w:${FILENAME}.hex:i
+	avrdude -V -c stk500v1 -p ${MCU} -P ${COMPORT} -b 19200 -U flash:w:${FILENAME}.hex
 	make clean
 
 clean:

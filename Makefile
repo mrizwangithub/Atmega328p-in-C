@@ -4,7 +4,7 @@
 FILENAME = nofilenameprovided
 MCU = atmega328p
 CPUSPEED = 16000000
-CPUSPEED_For_ChipOnBreadBoad = 1000000
+CPUSPEED_For_ChipOnBreadBoad = 8000000
 
 # Port on which arduino is connected. This can be checked in computer's manage -> devices
 COMPORT = com4
@@ -46,9 +46,9 @@ COMPORT = com4
 ${FILENAME}:
 	avr-gcc -Wall -g -Os -DF_CPU=${CPUSPEED_For_ChipOnBreadBoad} -mmcu=${MCU} -o ${FILENAME}.bin src/${FILENAME}.cpp  
 	avr-size -C ${FILENAME}.bin
-#	avr-objcopy -j .text -j .data -O ihex ${FILENAME}.bin ${FILENAME}.hex
+	avr-objcopy -j .text -j .data -O ihex ${FILENAME}.bin ${FILENAME}.hex
 	avr-objcopy -O ihex ${FILENAME}.bin ${FILENAME}.hex
-	avrdude -V -c stk500v1 -p ${MCU} -P ${COMPORT} -b 19200 -U flash:w:${FILENAME}.hex
+	avrdude -v -p${MCU} -cstk500v1 -P${COMPORT} -b19200 -Uflash:w:${FILENAME}.hex:i
 	make clean
 
 clean:
@@ -56,3 +56,9 @@ clean:
 	del ${FILENAME}.o
 	del ${FILENAME}.bin
 #	del ${FILENAME}.elf
+
+ReadLHFuse:
+	avrdude -v -p${MCU} -cstk500v1 -P${COMPORT} -b19200 -U hfuse:r:-:h -U lfuse:r:-:h -U efuse:r:-:h
+
+WriteLowFuse: #Set the low fuse byte to use 8MHz internal clock. Uncomment the line below.
+#	avrdude -cstk500v1 -p${MCU} -P${COMPORT} -b19200 -U lfuse:w:0xe2:m

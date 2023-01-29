@@ -1,0 +1,11 @@
+avrdude: reading hfuse memory ...
+avrdude: writing output file <stdout>
+0xd9
+
+avrdude: reading lfuse memory ...
+avrdude: writing output file <stdout>
+0x62
+
+avrdude: reading efuse memory ...
+avrdude: writing output file <stdout>
+0xff

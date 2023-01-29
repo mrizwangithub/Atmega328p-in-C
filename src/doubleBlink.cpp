@@ -7,7 +7,7 @@
 
 int main(void){
 
-  DDRB = 0b00000011; // Sets PB0 and PB1 to outputs
+ DDRB |= (1 << DDB5);
 
   while(1){
 
